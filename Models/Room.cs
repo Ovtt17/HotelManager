@@ -5,18 +5,18 @@ namespace HotelManager.Models
     public class Room
     {
         [Key]
-        public int RoomId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
-        public required string RoomType { get; set; }
+        public required string Name { get; set; }
 
         [Required]
-        [DataType(DataType.Currency)]
-        public required decimal PricePerNight { get; set; }
+        public required int Capacity { get; set; }
 
-        // Navigation property for related reservations
         [Required]
+        public required decimal Price { get; set; }
+
         public ICollection<Reservation>? Reservations { get; set; }
     }
 }

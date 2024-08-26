@@ -6,7 +6,7 @@ namespace HotelManager.Models
     public class Reservation
     {
         [Key]
-        public int ReservationId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [ForeignKey("Guest")]
@@ -25,8 +25,8 @@ namespace HotelManager.Models
         public DateTime CheckOutDate { get; set; }
 
         // Navigation properties
-        public required Guest Guest { get; set; }
+        public Guest? Guest { get; set; }
 
-        public required Room Room { get; set; }
+        public Room? Room { get; set; }
     }
 }

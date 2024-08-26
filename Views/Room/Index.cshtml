@@ -1,0 +1,42 @@
+@model IEnumerable<HotelManager.Models.Room>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-white">Index</h1>
+
+<div class="d-flex justify-content-end mb-3">
+    <form asp-action="Index" method="get" class="form-inline">
+        <input type="text" name="searchString" class="form-control mr-2 mb-2" placeholder="Search by name" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<div class="row bg-black text-white">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 d-flex align-items-stretch">
+            <div class="card mb-4 shadow-sm text-center bg-black text-white border-white">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                    <p class="card-text">
+                        <strong>Capacity:</strong> @Html.DisplayFor(modelItem => item.Capacity)<br />
+                        <strong>Price:</strong> @Html.DisplayFor(modelItem => item.Price)
+                    </p>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="btn-group">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn text-white btn-sm btn-outline-white">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm text-white btn-outline-white">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm text-white btn-outline-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

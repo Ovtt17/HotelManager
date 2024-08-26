@@ -1,0 +1,59 @@
+@model IEnumerable<HotelManager.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div class="d-flex justify-content-end mb-3">
+    <form asp-action="Index" method="get" class="form-inline">
+        <input type="text" name="searchString" class="form-control mr-2 mb-2" placeholder="Search by guest email" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table bg-black text-white">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckInDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckOutDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guest)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Room)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckInDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckOutDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guest.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room.Name)
+            </td>
+                <td>
+                    <a class="btn text-white btn-sm btn-outline-white" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="btn text-white btn-sm btn-outline-white" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="btn text-white btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

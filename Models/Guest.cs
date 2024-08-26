@@ -5,7 +5,7 @@ namespace HotelManager.Models
     public class Guest
     {
         [Key]
-        public int GuestId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(100)]
