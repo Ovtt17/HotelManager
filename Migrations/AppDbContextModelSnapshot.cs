@@ -47,6 +47,39 @@ namespace HotelManager.Migrations
                     b.ToTable("Guests");
                 });
 
+            modelBuilder.Entity("HotelManager.Models.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<int>("GuestId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GuestId");
+
+                    b.HasIndex("ReservationId");
+
+                    b.ToTable("Payments");
+                });
+
             modelBuilder.Entity("HotelManager.Models.Reservation", b =>
                 {
                     b.Property<int>("Id")
@@ -100,6 +133,25 @@ namespace HotelManager.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("HotelManager.Models.Payment", b =>
+                {
+                    b.HasOne("HotelManager.Models.Guest", "Guest")
+                        .WithMany("Payments")
+                        .HasForeignKey("GuestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelManager.Models.Reservation", "Reservation")
+                        .WithMany()
+                        .HasForeignKey("ReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Guest");
+
+                    b.Navigation("Reservation");
+                });
+
             modelBuilder.Entity("HotelManager.Models.Reservation", b =>
                 {
                     b.HasOne("HotelManager.Models.Guest", "Guest")
@@ -121,6 +173,8 @@ namespace HotelManager.Migrations
 
             modelBuilder.Entity("HotelManager.Models.Guest", b =>
                 {
+                    b.Navigation("Payments");
+
                     b.Navigation("Reservations");
                 });
 

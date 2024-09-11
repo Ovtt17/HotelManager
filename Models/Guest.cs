@@ -18,8 +18,6 @@ namespace HotelManager.Models
         [Required]
         [Phone]
         public required string Phone { get; set; }
-
-        // Navigation property for related reservations
         public ICollection<Reservation>? Reservations { get; set; }
     }
 }
